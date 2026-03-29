@@ -5,7 +5,7 @@ metadata:
   labels:
     app: task-manager
 spec:
-  replicas: 2                    # Minimum 2 replicas as required
+  replicas: 2
   selector:
     matchLabels:
       app: task-manager
@@ -21,7 +21,7 @@ spec:
     spec:
       containers:
         - name: task-manager
-          image: YOUR_DOCKERHUB_USERNAME/task-manager:latest
+          image: dhanushsada/assignment-3:latest
           ports:
             - containerPort: 3000
           env:
@@ -64,5 +64,5 @@ spec:
     - protocol: TCP
       port: 80
       targetPort: 3000
-      nodePort: 30080          # Fixed NodePort for easy access
-  type: NodePort               # Exposes via Minikube IP
+      nodePort: 30080
+  type: NodePort
