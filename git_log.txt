@@ -1,0 +1,16 @@
+b59a77c Readme is updated final time
+ec8b184 Add Kubernetes Deployment (2 replicas) and NodePort Service for app
+e506e80 File name has been changed
+b8939fb Add Kubernetes Deployment and NodePort Services for app
+01e5942 Add Kubernetes Deployment and Cluster IP Service for Redis background
+1874cae About Docker added in Readme
+b7ef72b Add docker-compose.yml for local multi-container development
+c4ae086 Add multi-stage Dockerfile with health check and non-root user
+6aa0445 Add frontend UI for task management
+9e02218 Add api with redis crud routes and health check endpoint
+78ffe39 Add package.json with Express and Redis dependencies
+927002d Add this file for learning
+6aec5a7 Merge branch 'main' of https://github.com/Dhanush-sada/assignment-3
+a5b7a95 Initial project structure and README
+1c686be Initial project structure and README
+fb3cce2 Initial commit
