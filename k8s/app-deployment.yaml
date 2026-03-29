@@ -1,19 +1,68 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: web-deployment
+  name: task-manager-deployment
+  labels:
+    app: task-manager
 spec:
-  replicas: 2
+  replicas: 2                    # Minimum 2 replicas as required
   selector:
     matchLabels:
-      app: web
+      app: task-manager
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 0
   template:
     metadata:
       labels:
-        app: web
+        app: task-manager
     spec:
       containers:
-      - name: web
-        image: dapp
-        ports:
-        - containerPort: 5000
+        - name: task-manager
+          image: YOUR_DOCKERHUB_USERNAME/task-manager:latest
+          ports:
+            - containerPort: 3000
+          env:
+            - name: REDIS_HOST
+              value: "redis-service"
+            - name: REDIS_PORT
+              value: "6379"
+            - name: PORT
+              value: "3000"
+          resources:
+            requests:
+              memory: "128Mi"
+              cpu: "100m"
+            limits:
+              memory: "256Mi"
+              cpu: "300m"
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: 3000
+            initialDelaySeconds: 10
+            periodSeconds: 5
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: 3000
+            initialDelaySeconds: 15
+            periodSeconds: 20
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: task-manager-service
+  labels:
+    app: task-manager
+spec:
+  selector:
+    app: task-manager
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 3000
+      nodePort: 30080          # Fixed NodePort for easy access
+  type: NodePort               # Exposes via Minikube IP
