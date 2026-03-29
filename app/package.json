@@ -1,0 +1,14 @@
+{
+  "name": "task-manager",
+  "version": "1.0.0",
+  "description": "A simple task manager with Redis backend",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "express": "^4.18.2",
+    "redis": "^4.6.7",
+    "cors": "^2.8.5"
+  }
+}
